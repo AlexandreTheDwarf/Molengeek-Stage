@@ -1,0 +1,101 @@
+<odoo>
+    <record id="view_training_session_form" model="ir.ui.view">
+        <field name="name">training.session.form</field>
+        <field name="model">training.session</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="print_upcoming_sessions" string="Imprimer" type="object" class="btn-secondary"/>
+                    <button name="action_confirm" type="object" string="Confirmer" states="draft" class="btn-primary"/>
+                    <button name="action_done" type="object" string="Terminer" states="confirmed" class="btn-success"/>
+                    <button name="action_draft" type="object" string="Revenir en brouillon" states="done" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_datetime"/>
+                        <field name="end_datetime"/>
+                        <field name="trainer_id"/>
+                        <field name="room_id"/>
+                        <field name="participant_ids" widget="many2many_tags"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste améliorée -->
+    <record id="view_training_session_tree" model="ir.ui.view">
+        <field name="name">training.session.tree</field>
+        <field name="model">training.session</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="trainer_id"/>
+                <field name="room_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue calendrier -->
+    <record id="view_training_session_calendar" model="ir.ui.view">
+        <field name="name">training.session.calendar</field>
+        <field name="model">training.session</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendrier des sessions" date_start="start_datetime" date_stop="end_datetime" color="trainer_id">
+                <field name="name"/>
+                <field name="trainer_id"/>
+                <field name="room_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Vue Kanban -->
+    <record id="view_training_session_kanban" model="ir.ui.view">
+        <field name="name">training.session.kanban</field>
+        <field name="model">training.session</field>
+        <field name="arch" type="xml">
+            <kanban group_by="state" default_group_by="state">
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <div class="o_kanban_record_title">
+                                <strong><field name="name"/></strong>
+                            </div>
+                            <div>
+                                <field name="start_datetime"/> → <field name="end_datetime"/>
+                            </div>
+                            <div>
+                                🧑‍🏫 <field name="trainer_id"/>
+                            </div>
+                            <div>
+                                🏫 <field name="room_id"/>
+                            </div>
+                            <div>
+                                <div t-attf-class="badge badge-#{record.state.raw_value}">
+                                    <field name="state"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action mise à jour avec view_ids -->
+    <record id="action_training_session" model="ir.actions.act_window">
+        <field name="name">Sessions de formation</field>
+        <field name="res_model">training.session</field>
+        <field name="view_mode">kanban,tree,form,calendar</field>
+    </record>
+
+    <!-- Menus inchangés -->
+    <menuitem id="menu_training_root" name="Formation"/>
+    <menuitem id="menu_training_sessions" name="Sessions" parent="menu_training_root" action="action_training_session"/>
+</odoo>

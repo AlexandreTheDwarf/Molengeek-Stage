@@ -1,0 +1,37 @@
+<odoo>
+  <report
+        id="training_session_report"
+        model="training.session"
+        string="Sessions à venir"
+        report_type="qweb-pdf"
+        name="training_calendar.report_training_sessions"
+        file="training_calendar.report_training_sessions"
+        print_report_name="'Sessions_' + object.name"
+    />
+
+  <template id="report_training_sessions">
+    <t t-call="web.external_layout">
+      <h1 style="text-align:center;">📖 Rapport des sessions à venir</h1>
+      <t t-foreach="docs" t-as="session">
+        <div class="page">
+          <h2 style="color:#2c3e50;">🗓️ Session : <t t-esc="session.name"/></h2>
+          <table class="table table-sm">
+            <tr><td><strong>📅 Début :</strong></td><td><t t-esc="session.start_datetime"/></td></tr>
+            <tr><td><strong>⏱️ Fin :</strong></td><td><t t-esc="session.end_datetime"/></td></tr>
+            <tr><td><strong>👨‍🏫 Formateur :</strong></td><td><t t-esc="session.trainer_id.name"/></td></tr>
+            <tr><td><strong>🏫 Salle :</strong></td><td><t t-esc="session.room_id.name"/></td></tr>
+            <tr><td><strong>📌 État :</strong></td><td><t t-esc="session.state"/></td></tr>
+          </table>
+
+          <p style="margin-top:20px;"><strong>👥 Participants :</strong></p>
+          <ul>
+            <t t-foreach="session.participant_ids" t-as="p">
+              <li><t t-esc="p.name"/></li>
+            </t>
+          </ul>
+          <hr/>
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>

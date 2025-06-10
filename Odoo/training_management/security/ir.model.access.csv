@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_training_task_admin,training_task.admin,model_training_task,base.group_system,1,1,1,1
+access_training_project_admin,training_project.admin,model_training_project,base.group_system,1,1,1,1
+
+access_training_task_user,training_task.user,model_training_task,base.group_user,1,0,0,0
+access_training_project_user,training_project.user,model_training_project,base.group_user,1,0,0,0
+
+access_training_task_stagiaire,training_task.stagiaire,model_training_task,training_management.group_stagiaires_formation,1,0,0,0
+access_training_project_stagiaire,training_project.stagiaire,model_training_project,training_management.group_stagiaires_formation,1,0,0,0

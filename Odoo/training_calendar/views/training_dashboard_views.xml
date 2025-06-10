@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <!-- Vue Formulaire du Dashboard -->
+  <record id="view_training_dashboard_form" model="ir.ui.view">
+    <field name="name">training.dashboard.form</field>
+    <field name="model">training.dashboard</field>
+    <field name="arch" type="xml">
+      <form string="Tableau de bord des formations">
+        <group>
+          <field name="sessions_this_week"/>
+          <field name="most_active_trainers"/>
+          <field name="next_session"/>
+          <field name="filling_rate"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action liée à la vue -->
+  <record id="action_training_dashboard" model="ir.actions.act_window">
+    <field name="name">📊 Dashboard</field>
+    <field name="res_model">training.dashboard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_training_dashboard_form"/>
+    <field name="target">current</field>
+  </record>
+
+  <!-- Menu pour accéder au Dashboard -->
+    <record id="action_open_training_dashboard" model="ir.actions.server">
+        <field name="name">Ouvrir Dashboard</field>
+        <field name="model_id" ref="model_training_dashboard"/>
+        <field name="binding_model_id" ref="model_training_dashboard"/>
+        <field name="state">code</field>
+        <field name="code">action = model.open_dashboard()</field>
+    </record>
+
+    <menuitem id="menu_training_dashboard"
+            name="📊 Dashboard"
+            parent="menu_training_root"
+            action="action_open_training_dashboard"
+            sequence="99"/>
+</odoo>

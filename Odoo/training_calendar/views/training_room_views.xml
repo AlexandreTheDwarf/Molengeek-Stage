@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_training_room_form" model="ir.ui.view">
+        <field name="name">training.room.form</field>
+        <field name="model">training.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="capacity"/>
+                    <field name="equipment"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_training_room_tree" model="ir.ui.view">
+        <field name="name">training.room.tree</field>
+        <field name="model">training.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="capacity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_training_room" model="ir.actions.act_window">
+        <field name="name">Salles de formation</field>
+        <field name="res_model">training.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_training_root" name="Formation"/>
+    <menuitem id="menu_training_room" name="Salles" parent="menu_training_root" action="action_training_room"/>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_quick_planner_wizard,access_quick_planner_wizard,model_training_quick_planner_wizard,base.group_user,1,1,1,0
+access_training_session_import_participants,access_training_session_import_participants,model_training_session_import_participants,base.group_user,1,1,1,0
+access_participant_tag,participant.tag,model_participant_tag,base.group_user,1,1,1,1

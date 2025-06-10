@@ -1,0 +1,25 @@
+<odoo>
+  <!-- Menu racine pour ton module, si tu n'en as pas déjà un -->
+  <menuitem id="menu_participants_root" name="Participants" sequence="10"/>
+
+  <!-- Action pour la liste des tags -->
+  <record id="action_participant_tag" model="ir.actions.act_window">
+      <field name="name">Tags des participants</field>
+      <field name="res_model">participant.tag</field>
+      <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menu pour gérer les tags, enfant du menu Participants -->
+  <menuitem id="menu_participant_tags" name="Tags" parent="menu_participants_root" action="action_participant_tag" sequence="10"/>
+
+  <!-- Action pour la liste des participants -->
+  <record id="action_res_partner_participants" model="ir.actions.act_window">
+      <field name="name">Liste des participants</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('is_company', '=', False)]</field>
+  </record>
+
+  <!-- Menu pour voir la liste des participants -->
+  <menuitem id="menu_res_partner_participants" name="Participants" parent="menu_participants_root" action="action_res_partner_participants" sequence="20"/>
+</odoo>

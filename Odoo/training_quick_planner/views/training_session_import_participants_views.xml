@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Vue formulaire du wizard d'import participants CSV -->
+    <record id="view_training_session_import_participants_form" model="ir.ui.view">
+        <field name="name">training.session.import.participants.form</field>
+        <field name="model">training.session.import.participants</field>
+        <field name="arch" type="xml">
+            <form string="Importer des participants CSV">
+                <group>
+                    <field name="session_id" options="{'no_create': True}" />
+                    <field name="file" filename="filename" />
+                </group>
+                <footer>
+                    <button string="Importer" type="object" name="action_import" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour ouvrir le wizard -->
+    <record id="action_training_session_import_participants" model="ir.actions.act_window">
+        <field name="name">Importer Participants CSV</field>
+        <field name="res_model">training.session.import.participants</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>

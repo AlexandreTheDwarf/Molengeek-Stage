@@ -1,0 +1,82 @@
+<odoo>
+    <!-- Vue Tree -->
+    <record id="view_training_task_tree" model="ir.ui.view">
+        <field name="name">training.task.tree</field>
+        <field name="model">training.task</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="deadline"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Form -->
+    <record id="view_training_task_form" model="ir.ui.view">
+        <field name="name">training.task.form</field>
+        <field name="model">training.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="description"/>
+                        <field name="deadline"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Kanban -->
+    <record id="view_training_task_kanban" model="ir.ui.view">
+        <field name="name">training.task.kanban</field>
+        <field name="model">training.task</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" quick_create="true">
+                <field name="title"/>
+                <field name="description"/>
+                <field name="deadline"/>
+                <field name="status"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="o_kanban_card_header">
+                                <strong><field name="title"/></strong>
+                            </div>
+                            <div class="o_kanban_card_body">
+                                <field name="description"/>
+                                <div class="mt-2">
+                                    <i class="fa fa-calendar"/> <field name="deadline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_training_task" model="ir.actions.act_window">
+        <field name="name">Tâches de formation</field>
+        <field name="res_model">training.task</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="groups_id" eval="[
+            (4, ref('training_management.group_stagiaires_formation')),
+            (4, ref('base.group_system'))
+        ]"/>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_training_root" name="Gestion de Formation"
+              groups="training_management.group_stagiaires_formation,base.group_system"/>
+
+    <menuitem id="menu_training_tasks" name="Tâches"
+              parent="menu_training_root"
+              action="training_management.action_training_task"
+              groups="training_management.group_stagiaires_formation,base.group_system"/>
+</odoo>
+
