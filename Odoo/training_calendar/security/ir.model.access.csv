@@ -1,4 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_training_session_user,training.session user,model_training_session,base.group_user,1,1,1,1
-access_training_room_user,training.room user,model_training_room,base.group_user,1,1,1,1
-access_training_dashboard_user,access.training.dashboard.user,model_training_dashboard,base.group_user,1,1,1,1
+access_training_session_stagiaire,Droit Session pour Stagiaire,model_training_session,training_calendar.group_formation_stagiaire,1,0,0,0
+access_training_session_formateur,Droit Session pour Formateur,model_training_session,training_calendar.group_formation_formateur,1,1,0,0
+access_training_session_admin,Droit Session pour Admin,model_training_session,training_calendar.group_formation_admin,1,1,1,1
+access_training_room_stagiaire,Droit Salle pour Stagiaire,model_training_room,training_calendar.group_formation_stagiaire,1,0,0,0
+access_training_room_admin,Droit Salle pour Admin,model_training_room,training_calendar.group_formation_admin,1,1,1,1
+access_training_dashboard_stagiaire,Droit Dashboard pour Stagiaire,model_training_dashboard,training_calendar.group_formation_stagiaire,1,0,0,0
+access_training_dashboard_admin,Droit Dashboard pour Admin,model_training_dashboard,training_calendar.group_formation_admin,1,1,1,1
