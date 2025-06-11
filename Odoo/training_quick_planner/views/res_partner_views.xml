@@ -1,24 +1,24 @@
 <odoo>
-    <record id="view_res_partner_tree" model="ir.ui.view">
-        <field name="name">res.partner.tree</field>
+    <record id="view_res_partner_tree_inherit_tags" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit.tags</field>
         <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="participant_tag_ids" widget="many2many_tags"/>
-            </tree>
-        </field>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="widget">many2many_tags</attribute>
+            </xpath>
+            </field>
     </record>
 
-    <record id="view_res_partner_search" model="ir.ui.view">
-        <field name="name">res.partner.search</field>
+    <record id="view_res_partner_search_inherit_tags" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit.tags</field>
         <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
-            <search>
-                <filter string="Débutants" name="debutants" domain="[('participant_tag_ids.name', '=', 'Débutants')]"/>
-                <filter string="Confirmés" name="confirmes" domain="[('participant_tag_ids.name', '=', 'Confirmés')]"/>
-            </search>
+            <xpath expr="//search" position="inside">
+                <filter string="Débutants" name="debutants" domain="[('category_id.name', '=', 'Débutants')]"/>
+                <filter string="Confirmés" name="confirmes" domain="[('category_id.name', '=', 'Confirmés')]"/>
+            </xpath>
         </field>
     </record>
 </odoo>

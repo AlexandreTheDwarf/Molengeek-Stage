@@ -1,25 +1,35 @@
 <odoo>
-  <!-- Menu racine pour ton module, si tu n'en as pas déjà un -->
-  <menuitem id="menu_participants_root" name="Participants" sequence="10"/>
+    <menuitem id="menu_participants_root" name="Participants" sequence="10"/>
 
-  <!-- Action pour la liste des tags -->
-  <record id="action_participant_tag" model="ir.actions.act_window">
-      <field name="name">Tags des participants</field>
-      <field name="res_model">participant.tag</field>
-      <field name="view_mode">tree,form</field>
-  </record>
+    <record id="action_quick_planner_wizard" model="ir.actions.act_window">
+        <field name="name">Planification Rapide</field>
+        <field name="res_model">training.quick.planner.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
-  <!-- Menu pour gérer les tags, enfant du menu Participants -->
-  <menuitem id="menu_participant_tags" name="Tags" parent="menu_participants_root" action="action_participant_tag" sequence="10"/>
+    <record id="action_training_session_import_participants" model="ir.actions.act_window">
+        <field name="name">Importer Participants CSV</field>
+        <field name="res_model">training.session.import.participants</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
-  <!-- Action pour la liste des participants -->
-  <record id="action_res_partner_participants" model="ir.actions.act_window">
-      <field name="name">Liste des participants</field>
-      <field name="res_model">res.partner</field>
-      <field name="view_mode">tree,form</field>
-      <field name="domain">[('is_company', '=', False)]</field>
-  </record>
+    <menuitem id="menu_quick_planner_root"
+              name="Outils de Planification Rapide"
+              action="action_quick_planner_wizard"
+              sequence="85" /> <menuitem id="menu_import_csv_root"
+              name="Outils d'Import CSV"
+              action="action_training_session_import_participants"
+              sequence="86" /> 
 
-  <!-- Menu pour voir la liste des participants -->
-  <menuitem id="menu_res_partner_participants" name="Participants" parent="menu_participants_root" action="action_res_partner_participants" sequence="20"/>
+    <record id="action_res_partner_participants" model="ir.actions.act_window">
+        <field name="name">Liste des participants</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_company', '=', False)]</field>
+    </record>
+
+    <menuitem id="menu_res_partner_participants" name="Participants" parent="menu_participants_root" action="action_res_partner_participants" sequence="20"/>
+
 </odoo>

@@ -11,8 +11,7 @@
         'views/quick_planner_wizard_view.xml',
         'views/training_session_import_participants_views.xml',
         'views/training_menu.xml',
-        'views/participant_tag_views.xml',
-        'views/res_partner_views.xml',
+        'views/res_partner_views.xml'
     ],
     'installable': True,
     'application': True,
